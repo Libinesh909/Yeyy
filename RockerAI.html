@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRK AI Chatbot</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #1a1a1a; color: white; }
+        #chatbox { width: 80%; max-width: 400px; margin: auto; background: #333; padding: 20px; border-radius: 10px; }
+        #messages { height: 300px; overflow-y: auto; border-bottom: 2px solid #555; padding-bottom: 10px; }
+        .user, .bot { text-align: left; padding: 5px; margin: 5px; border-radius: 5px; }
+        .user { background: #007bff; color: white; }
+        .bot { background: #28a745; color: white; }
+        input { width: 75%; padding: 10px; }
+        button { padding: 10px; background: #ff4500; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>GRK AI Chatbot</h1>
+    <div id="chatbox">
+        <div id="messages"></div>
+        <input type="text" id="userInput" placeholder="Ask something...">
+        <button onclick="sendMessage()">Send</button>
+    </div><script>
+    function sendMessage() {
+        let userInput = document.getElementById("userInput").value;
+        if (!userInput) return;
+
+        let chatbox = document.getElementById("messages");
+        let userMessage = `<div class='user'>You: ${userInput}</div>`;
+        chatbox.innerHTML += userMessage;
+        document.getElementById("userInput").value = "";
+
+        setTimeout(() => {
+            let botReply = getBotResponse(userInput.toLowerCase());
+            let botMessage = `<div class='bot'>GRK AI: ${botReply}</div>`;
+            chatbox.innerHTML += botMessage;
+            chatbox.scrollTop = chatbox.scrollHeight;
+        }, 1000);
+    }
+
+    function getBotResponse(input) {
+        let responses = {
+            "hi": "Hello! Welcome to GRK AI!",
+            "who are you": "I am GRK AI, your gaming assistant!",
+            "free fire tips": "Always stay in the safe zone and use cover wisely!",
+            "gta cheats": "I can't provide cheats, but I can give you some gameplay tips!",
+            "bye": "Goodbye! See you again!"
+        };
+        return responses[input] || "I don't understand that yet, but I'm learning!";
+    }
+</script>
+
+</body>
+</html>
